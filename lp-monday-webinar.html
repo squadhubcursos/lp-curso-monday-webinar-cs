@@ -272,6 +272,95 @@ strong { font-weight: 700; color: var(--text-1); }
   line-height: 1.7;
 }
 
+/* ============================================================
+   BLOCO 3 — PROVAS
+   ============================================================ */
+.depo-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-top: 40px;
+}
+@media(min-width:600px){ .depo-grid { grid-template-columns: repeat(3,1fr); } }
+
+.depo-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: box-shadow 0.25s, border-color 0.25s;
+}
+.depo-card:hover {
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+  border-color: var(--border-lt);
+}
+.depo-stars {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 14px;
+}
+.depo-quote {
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.65;
+  flex: 1;
+  margin-bottom: 20px;
+}
+.depo-author { margin-top: auto; }
+.depo-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-1);
+}
+.depo-role {
+  font-size: 12px;
+  color: var(--text-3);
+  margin-top: 2px;
+}
+
+/* Faixa de autoridade */
+.autoridade-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0;
+  margin-top: 56px;
+  border: 1px solid var(--border-lt);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--card);
+}
+.auto-item {
+  flex: 1;
+  min-width: 160px;
+  padding: 28px 20px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+}
+.auto-item:last-child { border-right: none; }
+.auto-num {
+  font-family: var(--font-title);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  display: block;
+}
+.auto-lbl {
+  font-size: 12px;
+  color: var(--text-3);
+  margin-top: 6px;
+  display: block;
+  line-height: 1.4;
+}
+@media(max-width:520px){
+  .auto-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .auto-item:last-child { border-bottom: none; }
+}
+
 /* Responsive global */
 @media(min-width:768px){ .s { padding: 96px 20px; } }
 @media(min-width:768px){ .hero { padding: 100px 20px 80px; } }
@@ -386,6 +475,96 @@ strong { font-weight: 700; color: var(--text-1); }
 
     <div class="btn-wrap">
       <a href="#oferta" class="btn-cta">VER A CONDIÇÃO ESPECIAL</a>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== BLOCO 3 — PROVAS ===== -->
+<section class="s s-alt">
+  <div class="c">
+    <div class="sh">
+      <span class="eyebrow">Resultados Reais</span>
+      <h2>O que dizem quem já transformou<br>a empresa com o método</h2>
+      <p class="lead">Donos e gestores que pararam de apagar incêndio e voltaram a crescer.</p>
+    </div>
+
+    <div class="depo-grid" role="list">
+
+      <div class="depo-card" role="listitem">
+        <div>
+          <div class="depo-stars" aria-label="5 estrelas">
+            <!-- estrela x5 -->
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="depo-quote">Sou dono de uma agência de marketing digital e posso dizer que essa formação em Monday foi um divisor de águas. Com o curso, aprendi a integrar a plataforma com ferramentas essenciais como Google Ads e Facebook Ads, o que trouxe uma organização muito maior para minha equipe e aumentou significativamente nossa produtividade.</p>
+        </div>
+        <div class="depo-author">
+          <div class="depo-name">Lucas Ampessan</div>
+          <div class="depo-role">Gestor de Tráfego</div>
+        </div>
+      </div>
+
+      <div class="depo-card" role="listitem">
+        <div>
+          <div class="depo-stars" aria-label="5 estrelas">
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="depo-quote">Estávamos em busca de uma ferramenta para gerenciar nossos projetos e tarefas, e então a SquadHub nos apresentou a Monday, que hoje utilizamos em toda a empresa. O curso foi muito útil para entender todas as funcionalidades desde o início.</p>
+        </div>
+        <div class="depo-author">
+          <div class="depo-name">Vanessa Esquivel</div>
+          <div class="depo-role">Mr. Cat</div>
+        </div>
+      </div>
+
+      <div class="depo-card" role="listitem">
+        <div>
+          <div class="depo-stars" aria-label="5 estrelas">
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="depo-quote">Comprei o curso para entender melhor e operar o sistema na empresa onde trabalho, e estou aprendendo muito sobre como utilizar a plataforma de forma eficiente. Nota 5 estrelas — recomendo muito!</p>
+        </div>
+        <div class="depo-author">
+          <div class="depo-name">Bartolomeu Junior</div>
+          <div class="depo-role">Hoom Interativa</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Faixa de autoridade -->
+    <div class="autoridade-strip" role="list">
+      <div class="auto-item" role="listitem">
+        <span class="auto-num">250+</span>
+        <span class="auto-lbl">Empresas atendidas</span>
+      </div>
+      <div class="auto-item" role="listitem">
+        <span class="auto-num">33K+</span>
+        <span class="auto-lbl">Alunos formados</span>
+      </div>
+      <div class="auto-item" role="listitem">
+        <span class="auto-num">6+</span>
+        <span class="auto-lbl">Anos de mercado</span>
+      </div>
+      <div class="auto-item" role="listitem">
+        <span class="auto-num" style="font-size:clamp(14px,2vw,20px); color:var(--gold);">Parceira<br>Oficial</span>
+        <span class="auto-lbl">Monday.com — América Latina</span>
+      </div>
     </div>
 
   </div>
