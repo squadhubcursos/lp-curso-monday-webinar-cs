@@ -1,0 +1,1638 @@
+# LP Monday Webinar — Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Criar `lp-monday-webinar.html`, uma carta de vendas estática do curso Monday.com da SquadHub direcionada ao público quente do webinar "Cemitério de Softwares", com identidade visual dark navy/dourado do webinar e oferta R$1.997 → R$997.
+
+**Architecture:** Arquivo HTML único e autocontido (sem framework, sem build). Todos os estilos em `<style>` no `<head>`, JS mínimo inline no `<body>` (scroll suave). Segue a estrutura dos 12 Blocos PVP adaptados para público quente (Abordagem B).
+
+**Tech Stack:** HTML5, CSS3 (variáveis CSS, grid, clamp), Google Fonts (Barlow Condensed 700/800/900 + Inter 400/500/600/700), JavaScript vanilla (scroll suave only).
+
+## Global Constraints
+
+- Identidade visual: tokens do `cemiterio.html` — fundo `#050505`, surface `#080F1A`, cards `#0D2640`/`#163352`, dourado `#C8A24A`, azul claro `#4A9EBF`, vermelho `#EF4444`. Sem verde (#22c55e).
+- Fontes: Barlow Condensed (títulos, caixa-alta, weight 900) + Inter (corpo). Carregar via Google Fonts CDN.
+- CTA button: gradiente `linear-gradient(135deg, #1A4F72, #123A5A, #0D2E45)`.
+- Checkout URL placeholder: `https://checkout.squadhub.com.br/checkout/lp-monday-webinar` — comentar claramente no HTML.
+- Oferta: De R$1.997 (riscado) → Por **R$997**. Sem parcelamento exibido na página.
+- Sem menção a Leonardo Adonis. Sem bio/foto do Eduardo Leal. Sem vídeo. Sem formulário/modal.
+- Não citar Monday.com no badge/eyebrow do webinar (manter dissociação da marca no contexto de captura); pode citar Monday.com nas seções de produto/curso.
+- Responsivo: mobile-first, breakpoints em 520px e 760px.
+- Sem imagens externas pesadas. Sem base64. SVG inline para ícones e escudo de garantia.
+
+---
+
+### Task 1: HTML skeleton + CSS foundation
+
+**Files:**
+- Create: `C:\Users\joaoh\Documents\VS Studio\LP_CursoMonday_CS\lp-monday-webinar.html`
+
+**Produces:** Arquivo com `<!DOCTYPE html>`, `<head>` completo (meta, title, fonts), variáveis CSS `:root`, reset, utilitários de layout (`.c`, `.s`, `.s-alt`, `.divider`), tipografia base (`h1`, `h2`, `h3`, `p`, `.lead`, `.eyebrow`, `.sh`), e `<body>` vazio.
+
+- [ ] **Step 1: Criar o arquivo com skeleton HTML**
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formação Monday.com — Condição Especial Cemitério de Softwares</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   LP MONDAY — PÚBLICO WEBINAR CEMITÉRIO DE SOFTWARES
+   SquadHub · Condição especial pós-webinar
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:         #050505;
+  --surf:       #080F1A;
+  --card:       #0D2640;
+  --card-hi:    #163352;
+  --border:     #0F2A42;
+  --border-lt:  #1A3F5C;
+  --gold:       #C8A24A;
+  --gold-dim:   rgba(200,162,74,0.12);
+  --gold-border:rgba(200,162,74,0.50);
+  --blue-lt:    #4A9EBF;
+  --blue-bg:    rgba(18,58,90,0.30);
+  --blue-glow:  rgba(18,58,90,0.40);
+  --red:        #EF4444;
+  --red-dim:    rgba(239,68,68,0.12);
+  --text-1:     #F8FAFC;
+  --text-2:     #CBD5E1;
+  --text-3:     #7A9BB5;
+  --font-title: 'Barlow Condensed', sans-serif;
+  --font-body:  'Inter', sans-serif;
+  --max-w:      860px;
+  --r:          12px;
+  --r-lg:       20px;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text-1);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* Layout */
+.c { max-width: var(--max-w); margin: 0 auto; padding: 0 20px; width: 100%; }
+.s { padding: 72px 20px; }
+.s-alt { background: var(--surf); }
+.divider { height: 1px; background: var(--border); }
+
+/* Typography */
+h1 {
+  font-family: var(--font-title);
+  font-size: clamp(44px, 9vw, 92px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--text-1);
+}
+h2 {
+  font-family: var(--font-title);
+  font-size: clamp(26px, 4.8vw, 48px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--text-1);
+}
+h3 {
+  font-family: var(--font-title);
+  font-size: clamp(16px, 2.3vw, 20px);
+  font-weight: 800;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--text-1);
+}
+p { color: var(--text-2); font-size: 15px; line-height: 1.7; }
+.lead { font-size: clamp(15px, 2.2vw, 18px); line-height: 1.7; }
+strong { font-weight: 700; color: var(--text-1); }
+.gold { color: var(--gold); }
+.blue { color: var(--blue-lt); }
+.tc { text-align: center; }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--blue-lt);
+}
+
+.sh { text-align: center; margin-bottom: 48px; }
+.sh h2 { margin-top: 12px; }
+.sh .lead { margin-top: 14px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+/* CTA Button */
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #1A4F72, #123A5A, #0D2E45);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: clamp(13px, 2.5vw, 16px);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 18px 40px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 4px 24px rgba(18,58,90,0.55);
+  transition: transform 0.2s, box-shadow 0.2s;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  line-height: 1.4;
+}
+.btn-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(18,58,90,0.70); color: #fff !important; }
+.btn-cta:active { transform: translateY(0); }
+.btn-cta:focus, .btn-cta:visited { color: #fff !important; text-decoration: none !important; }
+
+.btn-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.btn-sub { font-size: 12px; color: var(--text-3); text-align: center; }
+
+/* Responsive global */
+@media(min-width:768px){ .s { padding: 96px 20px; } }
+@media(prefers-reduced-motion: reduce){
+  .btn-cta { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- CHECKOUT URL: https://checkout.squadhub.com.br/checkout/lp-monday-webinar -->
+<!-- SUBSTITUIR a URL acima antes de publicar -->
+
+</body>
+</html>
+```
+
+- [ ] **Step 2: Abrir no browser e verificar**
+  - Fundo `#050505` visível
+  - Fontes Barlow Condensed + Inter carregadas (sem fallback serif)
+  - Página sem conteúdo mas sem erros no console
+
+- [ ] **Step 3: Commit**
+  ```
+  git add lp-monday-webinar.html
+  git commit -m "feat: skeleton HTML + CSS foundation LP Monday webinar"
+  ```
+
+---
+
+### Task 2: Bloco 1 — Hero
+
+**Files:**
+- Modify: `lp-monday-webinar.html` — adicionar seção hero no `<body>` e CSS no `<style>`
+
+**Produces:** Hero com badge dourado "Condição Especial · Cemitério de Softwares", headline Barlow Condensed grande, sub-headline, e botão CTA que faz scroll suave até `#oferta`.
+
+- [ ] **Step 1: Adicionar CSS do hero no `<style>` (antes do fechamento `</style>`)**
+
+```css
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 72px 20px 64px;
+  text-align: center;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 400px;
+  background: radial-gradient(ellipse at center, rgba(18,58,90,0.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(18,58,90,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18,58,90,0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 1; }
+
+.event-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-border);
+  border-radius: 100px;
+  padding: 8px 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 32px;
+}
+
+.hero-label {
+  display: block;
+  font-family: var(--font-title);
+  font-size: clamp(13px, 1.8vw, 17px);
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--blue-lt);
+  margin-bottom: 8px;
+}
+
+.hero-title {
+  margin-bottom: 28px;
+}
+
+.hero-sub {
+  font-size: clamp(15px, 2.2vw, 18px);
+  color: var(--text-2);
+  line-height: 1.65;
+  max-width: 620px;
+  margin: 0 auto 40px;
+}
+
+@media(min-width:768px){ .hero { padding: 100px 20px 80px; } }
+```
+
+- [ ] **Step 2: Adicionar HTML do hero no `<body>` (após o comentário de checkout URL)**
+
+```html
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-inner c">
+
+    <div class="event-badge">
+      Condição Especial &nbsp;·&nbsp; Cemitério de Softwares
+    </div>
+
+    <h1 class="hero-title">
+      <span class="hero-label">Formação Completa</span>
+      Pare de apagar<br>incêndios.<br>
+      <span class="blue">Automatize sua</span><br>operação.
+    </h1>
+
+    <p class="hero-sub">
+      Você já viu o diagnóstico. Sabe o que está travando sua empresa.<br>
+      <strong>Agora é hora do tratamento:</strong> o passo a passo para centralizar sua operação, dar autonomia ao time e voltar a crescer — sem precisar contratar mais gente.
+    </p>
+
+    <div class="btn-wrap">
+      <a href="#oferta" class="btn-cta">
+        QUERO RESOLVER ISSO AGORA
+      </a>
+      <p class="btn-sub">Condição especial disponível por tempo limitado</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+```
+
+- [ ] **Step 3: Verificar no browser**
+  - Badge dourado com borda dourada visível
+  - Headline em Barlow Condensed 900 grande e legível
+  - Grid overlay sutil no fundo
+  - Botão CTA navy com hover funcionando
+  - Responsivo no mobile (redimensionar janela para < 480px)
+
+- [ ] **Step 4: Commit**
+  ```
+  git commit -m "feat: bloco 1 hero LP Monday webinar"
+  ```
+
+---
+
+### Task 3: Bloco 2 — Ponte (dor comprimida + virada)
+
+**Files:**
+- Modify: `lp-monday-webinar.html`
+
+**Produces:** 6 cards de problema compactos (borda vermelha) + frase de virada em destaque + botão âncora para `#oferta`.
+
+- [ ] **Step 1: Adicionar CSS no `<style>`**
+
+```css
+/* ============================================================
+   BLOCO 2 — PONTE
+   ============================================================ */
+.ponte-intro {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 40px;
+}
+.ponte-intro p {
+  font-size: clamp(15px, 2vw, 17px);
+  color: var(--text-2);
+  margin-top: 14px;
+  line-height: 1.7;
+}
+
+.prob-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 48px;
+}
+@media(min-width:520px){ .prob-grid { grid-template-columns: repeat(2,1fr); } }
+@media(min-width:760px){ .prob-grid { grid-template-columns: repeat(3,1fr); } }
+
+.prob-card {
+  background: linear-gradient(135deg, #16121E, #110F1A);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--red);
+  border-radius: var(--r);
+  padding: 20px 18px;
+}
+.prob-icon { color: var(--red); margin-bottom: 12px; display: flex; }
+.prob-card h3 { font-size: 15px; margin-bottom: 6px; }
+.prob-card p  { font-size: 13px; color: var(--text-3); line-height: 1.55; }
+
+.virada-box {
+  background: var(--card);
+  border: 1px solid var(--border-lt);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--r-lg);
+  padding: 36px 28px;
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 36px;
+}
+.virada-box .eyebrow { margin-bottom: 12px; }
+.virada-box h2 {
+  font-size: clamp(22px, 4vw, 36px);
+  margin-bottom: 14px;
+  color: var(--text-1);
+}
+.virada-box p {
+  font-size: clamp(14px, 1.8vw, 16px);
+  color: var(--text-2);
+  line-height: 1.7;
+}
+```
+
+- [ ] **Step 2: Adicionar HTML após o primeiro `<div class="divider"></div>`**
+
+```html
+<!-- ===== BLOCO 2 — PONTE ===== -->
+<section class="s">
+  <div class="c">
+
+    <div class="ponte-intro">
+      <span class="eyebrow">Você reconhece esse cenário?</span>
+      <h2 style="margin-top:12px;">Sua empresa parou de crescer<br>— e você sabe por quê.</h2>
+      <p>Você acumula ferramentas, o time está perdido e você ainda é o ponto central de tudo. Não é coincidência. É um padrão.</p>
+    </div>
+
+    <div class="prob-grid" role="list">
+
+      <div class="prob-card" role="listitem">
+        <div class="prob-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>WhatsApp virou CRM</h3>
+        <p>Tarefas, aprovações, cobranças — tudo misturado. Informação importante some em 3 dias.</p>
+      </div>
+
+      <div class="prob-card" role="listitem">
+        <div class="prob-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <h3>Planilha desatualizada</h3>
+        <p>Cada pessoa tem a sua versão. Decisões tomadas com dados de ontem.</p>
+      </div>
+
+      <div class="prob-card" role="listitem">
+        <div class="prob-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+        </div>
+        <h3>Assinaturas que não entregam</h3>
+        <p>80% do time não usa os softwares que você paga todo mês.</p>
+      </div>
+
+      <div class="prob-card" role="listitem">
+        <div class="prob-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+        </div>
+        <h3>Retrabalho constante</h3>
+        <p>A mesma informação digitada em três sistemas. Erros e tempo desperdiçado.</p>
+      </div>
+
+      <div class="prob-card" role="listitem">
+        <div class="prob-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg>
+        </div>
+        <h3>Você é o único que sabe tudo</h3>
+        <p>Sem você presente, nada avança. O time depende do seu aval pra cada decisão pequena.</p>
+      </div>
+
+      <div class="prob-card" role="listitem">
+        <div class="prob-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+        </div>
+        <h3>Mais software, mais confusão</h3>
+        <p>Quanto mais ferramentas, mais reuniões de alinhamento. O crescimento trava.</p>
+      </div>
+
+    </div>
+
+    <div class="virada-box">
+      <span class="eyebrow">A Virada</span>
+      <h2>Você já viu o diagnóstico.<br><span class="gold">Aqui está o tratamento.</span></h2>
+      <p>Empresas que saíram desse ciclo não compraram mais um software. Elas pararam de empilhar e passaram a <strong>centralizar</strong>. Existe um método para fazer isso — e você pode aplicar na sua empresa ainda esta semana.</p>
+    </div>
+
+    <div class="btn-wrap">
+      <a href="#oferta" class="btn-cta">VER A CONDIÇÃO ESPECIAL</a>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+```
+
+- [ ] **Step 3: Verificar no browser**
+  - 6 cards com borda esquerda vermelha em grid 3 colunas (desktop) / 2 col (tablet) / 1 col (mobile)
+  - Caixa de virada com borda dourada no topo
+  - Botão scroll corretamente para `#oferta` (ainda não existe a âncora, mas o clique não deve dar erro)
+
+- [ ] **Step 4: Commit**
+  ```
+  git commit -m "feat: bloco 2 ponte dor + virada LP Monday webinar"
+  ```
+
+---
+
+### Task 4: Bloco 3 — Provas (depoimentos + autoridade)
+
+**Files:**
+- Modify: `lp-monday-webinar.html`
+
+**Produces:** Header de seção, 3 cards de depoimento (Lucas, Vanessa, Bartolomeu) com estrelas, e faixa de números de autoridade SquadHub (250+ empresas / 33k+ alunos / 6+ anos / Parceira Oficial Monday.com).
+
+- [ ] **Step 1: Adicionar CSS no `<style>`**
+
+```css
+/* ============================================================
+   BLOCO 3 — PROVAS
+   ============================================================ */
+.depo-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-top: 40px;
+}
+@media(min-width:600px){ .depo-grid { grid-template-columns: repeat(3,1fr); } }
+
+.depo-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: box-shadow 0.25s, border-color 0.25s;
+}
+.depo-card:hover {
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+  border-color: var(--border-lt);
+}
+.depo-stars {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 14px;
+}
+.depo-quote {
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.65;
+  flex: 1;
+  margin-bottom: 20px;
+}
+.depo-author { margin-top: auto; }
+.depo-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-1);
+}
+.depo-role {
+  font-size: 12px;
+  color: var(--text-3);
+  margin-top: 2px;
+}
+
+/* Faixa de autoridade */
+.autoridade-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0;
+  margin-top: 56px;
+  border: 1px solid var(--border-lt);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--card);
+}
+.auto-item {
+  flex: 1;
+  min-width: 160px;
+  padding: 28px 20px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+}
+.auto-item:last-child { border-right: none; }
+.auto-num {
+  font-family: var(--font-title);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  display: block;
+}
+.auto-lbl {
+  font-size: 12px;
+  color: var(--text-3);
+  margin-top: 6px;
+  display: block;
+  line-height: 1.4;
+}
+@media(max-width:520px){
+  .auto-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .auto-item:last-child { border-bottom: none; }
+}
+```
+
+- [ ] **Step 2: Adicionar HTML após o segundo `<div class="divider"></div>`**
+
+```html
+<!-- ===== BLOCO 3 — PROVAS ===== -->
+<section class="s s-alt">
+  <div class="c">
+    <div class="sh">
+      <span class="eyebrow">Resultados Reais</span>
+      <h2>O que dizem quem já transformou<br>a empresa com o método</h2>
+      <p class="lead">Donos e gestores que pararam de apagar incêndio e voltaram a crescer.</p>
+    </div>
+
+    <div class="depo-grid" role="list">
+
+      <div class="depo-card" role="listitem">
+        <div>
+          <div class="depo-stars" aria-label="5 estrelas">
+            <!-- estrela x5 -->
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1.0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="depo-quote">Sou dono de uma agência de marketing digital e posso dizer que essa formação em Monday foi um divisor de águas. Com o curso, aprendi a integrar a plataforma com ferramentas essenciais como Google Ads e Facebook Ads, o que trouxe uma organização muito maior para minha equipe e aumentou significativamente nossa produtividade.</p>
+        </div>
+        <div class="depo-author">
+          <div class="depo-name">Lucas Ampessan</div>
+          <div class="depo-role">Gestor de Tráfego</div>
+        </div>
+      </div>
+
+      <div class="depo-card" role="listitem">
+        <div>
+          <div class="depo-stars" aria-label="5 estrelas">
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="depo-quote">Estávamos em busca de uma ferramenta para gerenciar nossos projetos e tarefas, e então a SquadHub nos apresentou a Monday, que hoje utilizamos em toda a empresa. O curso foi muito útil para entender todas as funcionalidades desde o início.</p>
+        </div>
+        <div class="depo-author">
+          <div class="depo-name">Vanessa Esquivel</div>
+          <div class="depo-role">Mr. Cat</div>
+        </div>
+      </div>
+
+      <div class="depo-card" role="listitem">
+        <div>
+          <div class="depo-stars" aria-label="5 estrelas">
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="#C8A24A" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="depo-quote">Comprei o curso para entender melhor e operar o sistema na empresa onde trabalho, e estou aprendendo muito sobre como utilizar a plataforma de forma eficiente. Nota 5 estrelas — recomendo muito!</p>
+        </div>
+        <div class="depo-author">
+          <div class="depo-name">Bartolomeu Junior</div>
+          <div class="depo-role">Hoom Interativa</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Faixa de autoridade -->
+    <div class="autoridade-strip" role="list">
+      <div class="auto-item" role="listitem">
+        <span class="auto-num">250+</span>
+        <span class="auto-lbl">Empresas atendidas</span>
+      </div>
+      <div class="auto-item" role="listitem">
+        <span class="auto-num">33K+</span>
+        <span class="auto-lbl">Alunos formados</span>
+      </div>
+      <div class="auto-item" role="listitem">
+        <span class="auto-num">6+</span>
+        <span class="auto-lbl">Anos de mercado</span>
+      </div>
+      <div class="auto-item" role="listitem">
+        <span class="auto-num" style="font-size:clamp(14px,2vw,20px); color:var(--gold);">Parceira<br>Oficial</span>
+        <span class="auto-lbl">Monday.com — América Latina</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+```
+
+- [ ] **Step 3: Verificar no browser**
+  - 3 cards de depoimento com estrelas douradas
+  - Faixa de autoridade com 4 células e números dourados
+  - Responsivo (mobile: 1 coluna; ≥600px: 3 colunas)
+
+- [ ] **Step 4: Commit**
+  ```
+  git commit -m "feat: bloco 3 depoimentos + autoridade LP Monday webinar"
+  ```
+
+---
+
+### Task 5: Blocos 4-7 — Bullets, Exclusividade, Dor & Solução, Como Funciona
+
+**Files:**
+- Modify: `lp-monday-webinar.html`
+
+**Produces:** Headline de desejo + 5 bullets (Bloco 4), 5 problemas expandidos (Bloco 5), 3 pares dor→solução (Bloco 6), 3 passos com benefício (Bloco 7).
+
+- [ ] **Step 1: Adicionar CSS no `<style>`**
+
+```css
+/* ============================================================
+   BLOCOS 4-7
+   ============================================================ */
+
+/* Bullets de desejo */
+.bullets-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 28px;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.bullet-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+}
+.bullet-ico {
+  flex-shrink: 0;
+  color: var(--blue-lt);
+  margin-top: 2px;
+}
+.bullet-item p {
+  font-size: 15px;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+/* Problemas expandidos (Bloco 5) */
+.excl-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 32px;
+}
+.excl-card {
+  background: linear-gradient(135deg, #16121E, #110F1A);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--red);
+  border-radius: var(--r);
+  padding: 22px 22px;
+}
+.excl-card h3 { font-size: 16px; margin-bottom: 8px; }
+.excl-card p  { font-size: 14px; color: var(--text-3); line-height: 1.6; }
+
+/* Dor & Solução (Bloco 6) */
+.ds-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 32px;
+}
+.ds-card {
+  background: var(--card-hi);
+  border: 1px solid var(--border-lt);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.ds-dor {
+  padding: 18px 24px;
+  background: var(--red-dim);
+  border-bottom: 1px solid rgba(239,68,68,0.15);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ds-sol {
+  padding: 20px 24px;
+}
+.ds-sol h3 { font-size: 16px; margin-bottom: 8px; color: var(--text-1); }
+.ds-sol p  { font-size: 14px; color: var(--text-3); line-height: 1.6; }
+
+/* Como Funciona (Bloco 7) */
+.steps-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 40px;
+}
+@media(min-width:600px){ .steps-grid { grid-template-columns: repeat(3,1fr); } }
+
+.step-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--blue-lt);
+  border-radius: var(--r);
+  padding: 28px 22px;
+  text-align: center;
+}
+.step-num {
+  font-family: var(--font-title);
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--border-lt);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.step-card h3 { font-size: 16px; margin-bottom: 10px; }
+.step-card p  { font-size: 14px; color: var(--text-3); line-height: 1.6; }
+.step-benefit {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: var(--blue-bg);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--blue-lt);
+  font-weight: 600;
+}
+```
+
+- [ ] **Step 2: Adicionar HTML após o terceiro `<div class="divider"></div>`**
+
+```html
+<!-- ===== BLOCO 4 — HEADLINE + BULLETS ===== -->
+<section class="s">
+  <div class="c">
+    <div class="sh">
+      <span class="eyebrow">O que muda com o método</span>
+      <h2>Imagine sua empresa rodando<br><span class="blue">sem você no meio de tudo</span></h2>
+      <p class="lead">Esse é o estado que empresas que crescem de verdade têm em comum. E é exatamente o que esse método entrega.</p>
+    </div>
+
+    <ul class="bullets-list">
+      <li class="bullet-item">
+        <span class="bullet-ico" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <p><strong>Entender por que seus softwares atuais falham</strong> — e nunca mais cair na armadilha de comprar mais uma ferramenta sem ter a lógica certa por trás.</p>
+      </li>
+      <li class="bullet-item">
+        <span class="bullet-ico" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <p><strong>Mapear exatamente o que sua operação precisa</strong> — e aposentar as ferramentas que estão só acumulando custo e confusão.</p>
+      </li>
+      <li class="bullet-item">
+        <span class="bullet-ico" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <p><strong>Colocar IA e automações trabalhando por você 24/7</strong> — eliminando tarefas repetitivas e erros humanos sem precisar inflar o time.</p>
+      </li>
+      <li class="bullet-item">
+        <span class="bullet-ico" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <p><strong>Ter um painel gerencial que você bate o olho às 9h</strong> e já sabe o que tá andando, o que tá atrasado e quanto tá entrando no caixa — sem mandar um "já fez aquilo?" no WhatsApp.</p>
+      </li>
+      <li class="bullet-item">
+        <span class="bullet-ico" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <p><strong>Construir uma empresa que escala com menos pessoas</strong> — porque o time ganhou autonomia real, não só mais uma reunião de alinhamento.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== BLOCO 5 — EXCLUSIVIDADE (problemas expandidos) ===== -->
+<section class="s s-alt">
+  <div class="c">
+    <div class="sh">
+      <span class="eyebrow">Resultado da análise</span>
+      <h2>Se você chegou até aqui,<br>provavelmente está passando por:</h2>
+    </div>
+
+    <div class="excl-grid">
+      <div class="excl-card">
+        <h3>Sua operação depende 100% de você</h3>
+        <p>Toda decisão passa pelo seu crivo — não importa o tamanho. Você entrou de férias e o time travou. Você ficou doente e o projeto atrasou. A empresa cresceu, mas a sua dependência também.</p>
+      </div>
+      <div class="excl-card">
+        <h3>Você paga por softwares que ninguém usa</h3>
+        <p>O time adotou o WhatsApp de volta porque "é mais fácil". O ClickUp virou enfeite. O Trello ficou com 3 tarefas. Você continua pagando as assinaturas e continua sem visibilidade real da operação.</p>
+      </div>
+      <div class="excl-card">
+        <h3>A informação está espalhada em 5 lugares diferentes</h3>
+        <p>Proposta no e-mail. Status da entrega no WhatsApp. Financeiro na planilha. Tarefa no sistema. E quando você precisa de um número agora, precisa perguntar pra três pessoas diferentes para montar a resposta.</p>
+      </div>
+      <div class="excl-card">
+        <h3>Seu crescimento esbarrou no seu time</h3>
+        <p>Você quer contratar menos e produzir mais. Mas sem processo claro, cada nova pessoa que entra gera mais reunião de alinhamento — não mais resultado. O gargalo não é o time. É a falta de estrutura.</p>
+      </div>
+      <div class="excl-card">
+        <h3>Você não consegue sair do operacional</h3>
+        <p>O dia começa com urgências, termina com urgências. Você sabe que deveria estar pensando em crescimento, estratégia, novos mercados — mas a operação não deixa. E amanhã é igual.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== BLOCO 6 — DOR & SOLUÇÃO ===== -->
+<section class="s">
+  <div class="c">
+    <div class="sh">
+      <span class="eyebrow">A Formação Monday</span>
+      <h2>Resolva tudo isso em semanas<br><span class="blue">com a Formação em Monday.com</span></h2>
+    </div>
+
+    <div class="ds-grid">
+      <div class="ds-card">
+        <div class="ds-dor">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Sua empresa sem processos claros: caos, retrabalho e você no meio de tudo
+        </div>
+        <div class="ds-sol">
+          <h3>Curso Completo de Monday.com — Sob a Ótica do Dono</h3>
+          <p>Passo a passo prático para estruturar a espinha dorsal da sua empresa. Você vai aprender a desenhar processos, criar painéis gerenciais e centralizar sua operação em uma única tela — do jeito que um empresário precisa, não um funcionário técnico.</p>
+        </div>
+      </div>
+
+      <div class="ds-card">
+        <div class="ds-dor">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Tarefas repetitivas consumindo horas do seu time todos os dias
+        </div>
+        <div class="ds-sol">
+          <h3>Inteligência Artificial e Automações na Prática</h3>
+          <p>Como colocar robôs para trabalhar por você 24/7. Reduza o erro humano a zero, elimine tarefas repetitivas e faça sua empresa produzir o dobro sem precisar inflar o time. O que não existia há 2 anos agora é acessível com alguns cliques.</p>
+        </div>
+      </div>
+
+      <div class="ds-card">
+        <div class="ds-dor">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Nenhuma visibilidade do que acontece na empresa sem você perguntar
+        </div>
+        <div class="ds-sol">
+          <h3>Visibilidade Macrogerencial — O Painel do CEO</h3>
+          <p>Como configurar a ferramenta para que, às 9h da manhã, você bata o olho e saiba exatamente o que está andando, o que está atrasado e quanto está entrando no caixa. Sem mandar um único "já fez aquilo?" no WhatsApp.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== BLOCO 7 — COMO FUNCIONA ===== -->
+<section class="s s-alt">
+  <div class="c">
+    <div class="sh">
+      <span class="eyebrow">O Método</span>
+      <h2>Como funciona na prática</h2>
+      <p class="lead">Três fases simples. Cada uma com resultado concreto que você vê na semana em que aplica.</p>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3>Mapear</h3>
+        <p>Você entende a lógica por trás da escolha certa de ferramentas e aprende a desenhar os processos da sua empresa com clareza — identificando o que fica e o que vai pro cemitério.</p>
+        <div class="step-benefit">Fim do caos de ferramentas</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3>Implementar</h3>
+        <p>Você não começa do zero. Usa os templates validados da SquadHub — os exatos modelos que usamos em clientes de consultoria de alto padrão. É copiar, colar e adaptar ao seu negócio.</p>
+        <div class="step-benefit">Operação estruturada em dias</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3>Automatizar e Monitorar</h3>
+        <p>Você ativa automações e IA para eliminar o retrabalho, e configura o painel gerencial que te dá visibilidade total da operação — sem precisar perguntar pra ninguém.</p>
+        <div class="step-benefit">Time autônomo, dono estratégico</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+```
+
+- [ ] **Step 3: Verificar no browser**
+  - Bullets de desejo com ícone de check azul
+  - 5 cards de problema com borda vermelha esquerda
+  - 3 cards dor→solução com faixa vermelha no topo
+  - 3 passos em grid 3 colunas com número grande em cinza e badge azul
+  - Responsivo correto em todos os breakpoints
+
+- [ ] **Step 4: Commit**
+  ```
+  git commit -m "feat: blocos 4-7 bullets/exclusividade/dor-solucao/passos LP Monday webinar"
+  ```
+
+---
+
+### Task 6: Blocos 8-9 — Entregáveis e Bônus
+
+**Files:**
+- Modify: `lp-monday-webinar.html`
+
+**Produces:** Grid de 3 entregáveis (Bloco 8) e 3 cards de bônus com ancoragem de valor (Bloco 9).
+
+- [ ] **Step 1: Adicionar CSS no `<style>`**
+
+```css
+/* ============================================================
+   BLOCOS 8-9 — ENTREGÁVEIS + BÔNUS
+   ============================================================ */
+
+/* Entregáveis */
+.entrega-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 40px;
+}
+@media(min-width:600px){ .entrega-grid { grid-template-columns: repeat(3,1fr); } }
+
+.entrega-card {
+  background: var(--card-hi);
+  border: 1px solid var(--border-lt);
+  border-top: 3px solid var(--blue-lt);
+  border-radius: var(--r);
+  padding: 24px 20px;
+  transition: box-shadow 0.25s, border-color 0.25s;
+}
+.entrega-card:hover {
+  box-shadow: 0 0 24px var(--blue-glow);
+}
+.entrega-ico { color: var(--blue-lt); margin-bottom: 14px; display: flex; }
+.entrega-card strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-1);
+  margin-bottom: 10px;
+  line-height: 1.35;
+}
+.entrega-card p { font-size: 14px; color: var(--text-3); line-height: 1.65; }
+
+/* Bônus */
+.bonus-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 32px;
+}
+.bonus-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 var(--r) var(--r) 0;
+  padding: 24px 26px;
+  transition: box-shadow 0.2s;
+}
+.bonus-card:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+.bonus-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--gold);
+  background: var(--gold-dim);
+  border-radius: 4px;
+  padding: 3px 10px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.bonus-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-1);
+  margin-bottom: 6px;
+}
+.bonus-price {
+  font-size: 14px;
+  color: var(--text-3);
+  margin-bottom: 10px;
+}
+.bonus-price s { color: var(--border-lt); }
+.bonus-price .gratis { color: var(--gold); font-weight: 700; }
+.bonus-desc { font-size: 14px; color: var(--text-3); line-height: 1.65; }
+
+.bonus-total {
+  margin-top: 36px;
+  padding: 24px 28px;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--r-lg);
+  text-align: center;
+}
+.bonus-total p { font-size: 15px; color: var(--text-2); }
+.bonus-total strong { color: var(--gold); font-size: 18px; }
+```
+
+- [ ] **Step 2: Adicionar HTML após o quinto `<div class="divider"></div>`**
+
+```html
+<!-- ===== BLOCO 8 — ENTREGÁVEIS ===== -->
+<section class="s">
+  <div class="c">
+    <div class="sh">
+      <span class="eyebrow">O que está incluso</span>
+      <h2>Tudo que você leva ao garantir<br>seu acesso hoje</h2>
+      <p class="lead">Esta não é uma aula técnica para apertar botões. É o manual de eficiência operacional desenhado para a mente de um dono de negócio.</p>
+    </div>
+
+    <div class="entrega-grid" role="list">
+
+      <div class="entrega-card" role="listitem">
+        <div class="entrega-ico" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <strong>Curso Completo de Monday.com (Sob a Ótica do Dono)</strong>
+        <p>Passo a passo prático para estruturar a espinha dorsal da sua empresa: processos, painéis gerenciais e operação centralizada em uma única tela.</p>
+      </div>
+
+      <div class="entrega-card" role="listitem">
+        <div class="entrega-ico" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h1v6H9zm5-2h1v8h-1zm-2.5 4h1v4h-1z"/></svg>
+        </div>
+        <strong>Inteligência Artificial e Automações na Prática</strong>
+        <p>Como colocar robôs trabalhando por você 24/7: erro humano zero, tarefas repetitivas eliminadas, produção dobrada sem inflar o time.</p>
+      </div>
+
+      <div class="entrega-card" role="listitem">
+        <div class="entrega-ico" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        </div>
+        <strong>Visibilidade Macrogerencial — Painel do CEO</strong>
+        <p>Como configurar o painel que te dá visibilidade total da operação às 9h da manhã: o que anda, o que atrasou e quanto entrou no caixa. Sem perguntar pra ninguém.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== BLOCO 9 — BÔNUS ===== -->
+<section class="s s-alt">
+  <div class="c">
+    <div class="sh">
+      <span class="eyebrow">Bônus Exclusivos</span>
+      <h2>Você ainda leva<br><span class="gold">+R$2.291 em bônus de graça</span></h2>
+    </div>
+
+    <div class="bonus-grid">
+      <div class="bonus-card">
+        <span class="bonus-badge">Bônus 1</span>
+        <div class="bonus-title">Pacote de Templates Validados da SquadHub</div>
+        <div class="bonus-price"><s>R$ 497,00</s> → <span class="gratis">GRÁTIS</span></div>
+        <p class="bonus-desc">Você não vai começar do zero. Leva os exatos modelos de quadros e fluxos que usamos em nossos clientes de consultoria de alto padrão. É só copiar, colar e adaptar ao seu negócio.</p>
+      </div>
+      <div class="bonus-card">
+        <span class="bonus-badge">Bônus 2</span>
+        <div class="bonus-title">Curso Express de Scrum para Negócios</div>
+        <div class="bonus-price"><s>R$ 797,00</s> → <span class="gratis">GRÁTIS</span></div>
+        <p class="bonus-desc">O método de produtividade ágil para fazer sua equipe executar o dobro de tarefas na metade do tempo — exterminando a procrastinação e o "estou esperando o fulano" do dia a dia.</p>
+      </div>
+      <div class="bonus-card">
+        <span class="bonus-badge">Bônus 3</span>
+        <div class="bonus-title">Diagnóstico Estratégico Individual de 30 min</div>
+        <div class="bonus-price"><s>R$ 997,00</s> → <span class="gratis">GRÁTIS</span></div>
+        <p class="bonus-desc">Uma reunião individual com um consultor oficial da SquadHub para analisar o cenário da sua empresa e te dar o direcionamento cirúrgico do que priorizar primeiro.</p>
+      </div>
+    </div>
+
+    <div class="bonus-total">
+      <p>Somando treinamento completo + templates + Scrum + diagnóstico individual,<br>o valor total do pacote passaria facilmente de <strong>R$ 3.000,00</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+```
+
+- [ ] **Step 3: Verificar no browser**
+  - Grid de 3 entregáveis com ícone azul e borda azul no topo
+  - 3 bônus com borda esquerda dourada e badge dourado
+  - Caixa de ancoragem de valor ao final
+  - Responsivo
+
+- [ ] **Step 4: Commit**
+  ```
+  git commit -m "feat: blocos 8-9 entregaveis + bonus LP Monday webinar"
+  ```
+
+---
+
+### Task 7: Bloco 10 — Oferta Irresistível
+
+**Files:**
+- Modify: `lp-monday-webinar.html`
+
+**Produces:** Seção de oferta com id `oferta` (âncora dos CTAs anteriores), ancoragem de valor, display do preço R$1.997 → R$997, badge de condição especial, CTA principal para checkout.
+
+- [ ] **Step 1: Adicionar CSS no `<style>`**
+
+```css
+/* ============================================================
+   BLOCO 10 — OFERTA
+   ============================================================ */
+.oferta-section {
+  text-align: center;
+  padding: 88px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.oferta-section::before {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 400px;
+  background: radial-gradient(ellipse at center, rgba(200,162,74,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.oferta-inner { position: relative; z-index: 1; }
+
+.oferta-box {
+  background: var(--card);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--r-lg);
+  padding: 44px 36px;
+  max-width: 580px;
+  margin: 40px auto 0;
+}
+.oferta-label {
+  font-size: 13px;
+  color: var(--text-3);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.preco-de {
+  font-size: clamp(18px, 3vw, 24px);
+  color: var(--text-3);
+  text-decoration: line-through;
+  margin-bottom: 6px;
+}
+.preco-por {
+  font-family: var(--font-title);
+  font-size: clamp(52px, 10vw, 88px);
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.preco-por-label {
+  font-size: 14px;
+  color: var(--text-3);
+  margin-top: 8px;
+  margin-bottom: 28px;
+}
+.condicao-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-border);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+}
+```
+
+- [ ] **Step 2: Adicionar HTML após o sétimo `<div class="divider"></div>`**
+
+```html
+<!-- ===== BLOCO 10 — OFERTA ===== -->
+<section class="oferta-section" id="oferta">
+  <div class="oferta-inner c">
+    <span class="eyebrow" style="margin-bottom:16px; display:inline-block;">Condição Especial</span>
+    <h2>Garanta o seu acesso agora</h2>
+    <p class="lead" style="margin-top:12px; max-width:520px; margin-left:auto; margin-right:auto;">
+      Essa condição foi criada exclusivamente para quem participou do Cemitério de Softwares.<br>
+      <strong>Não é o preço público do curso.</strong>
+    </p>
+
+    <div class="oferta-box">
+      <div class="condicao-badge">
+        Condição Especial · Cemitério de Softwares
+      </div>
+
+      <p class="oferta-label">Investimento</p>
+      <p class="preco-de">De R$ 1.997,00</p>
+      <div class="preco-por">R$ 997</div>
+      <p class="preco-por-label">Condições de pagamento disponíveis no checkout</p>
+
+      <div class="btn-wrap">
+        <!-- CHECKOUT URL: substituir antes de publicar -->
+        <a href="https://checkout.squadhub.com.br/checkout/lp-monday-webinar" class="btn-cta">
+          QUERO GARANTIR MINHA VAGA
+        </a>
+        <p class="btn-sub">Acesso Imediato&nbsp;·&nbsp;Templates Inclusos&nbsp;·&nbsp;30 Dias de Garantia&nbsp;·&nbsp;🔒 Compra Segura</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+```
+
+- [ ] **Step 3: Verificar no browser**
+  - Ao clicar nos botões de âncora anteriores, a página rola até esta seção
+  - Preço R$1.997 riscado + R$997 em dourado grande e legível
+  - Badge de condição especial
+  - Botão CTA com link correto (placeholder)
+
+- [ ] **Step 4: Commit**
+  ```
+  git commit -m "feat: bloco 10 oferta irresistivel LP Monday webinar"
+  ```
+
+---
+
+### Task 8: Blocos 11-12 — Garantia, FAQ e Footer + JS scroll suave
+
+**Files:**
+- Modify: `lp-monday-webinar.html`
+
+**Produces:** Seção de garantia 30 dias (escudo SVG), FAQ accordion com 5 perguntas, rodapé legal, e script JS de scroll suave para âncoras.
+
+- [ ] **Step 1: Adicionar CSS no `<style>`**
+
+```css
+/* ============================================================
+   BLOCOS 11-12 — GARANTIA + FAQ + FOOTER
+   ============================================================ */
+
+/* Garantia */
+.garantia-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  background: var(--card);
+  border: 1px solid var(--border-lt);
+  border-radius: var(--r-lg);
+  padding: 40px 36px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+@media(max-width:600px){
+  .garantia-box { flex-direction: column; align-items: center; text-align: center; padding: 32px 24px; }
+}
+.garantia-ico-wrap {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.garantia-ico-wrap svg { width: 72px; height: 72px; }
+.garantia-selo-texto {
+  font-family: var(--font-title);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  line-height: 1.2;
+}
+.garantia-headline {
+  font-family: var(--font-title);
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--text-1);
+  margin-bottom: 12px;
+}
+.garantia-text {
+  font-size: 15px;
+  color: var(--text-2);
+  line-height: 1.7;
+}
+
+/* FAQ */
+.faq-list { margin-top: 32px; }
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 20px 0;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-1);
+  transition: color 0.2s;
+}
+.faq-question:hover { color: var(--blue-lt); }
+.faq-chevron {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--text-3);
+  transition: transform 0.25s;
+}
+.faq-item.open .faq-chevron { transform: rotate(180deg); }
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+  font-size: 14px;
+  color: var(--text-3);
+  line-height: 1.7;
+}
+.faq-item.open .faq-answer {
+  max-height: 400px;
+  padding-bottom: 20px;
+}
+
+/* Footer */
+.rodape {
+  padding: 32px 20px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+.rodape p {
+  font-size: 12px;
+  color: var(--text-3);
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+```
+
+- [ ] **Step 2: Adicionar HTML após o oitavo `<div class="divider"></div>`**
+
+```html
+<!-- ===== BLOCO 11 — GARANTIA ===== -->
+<section class="s s-alt">
+  <div class="c">
+    <div class="garantia-box">
+      <div class="garantia-ico-wrap">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M40 6L12 18v20c0 16.6 11.8 32.1 28 35.8C56.2 70.1 68 54.6 68 38V18L40 6z" fill="#C8A24A" opacity="0.10"/>
+          <path d="M40 6L12 18v20c0 16.6 11.8 32.1 28 35.8C56.2 70.1 68 54.6 68 38V18L40 6z" stroke="#C8A24A" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M28 40l8 8 16-16" stroke="#C8A24A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="garantia-selo-texto">30 dias<br>de garantia</span>
+      </div>
+      <div>
+        <h2 class="garantia-headline">Risco Zero: Garantia Incondicional de 30 Dias</h2>
+        <p class="garantia-text">
+          O risco é todo meu. Se você garantir o seu acesso agora, assistir às aulas, baixar os templates e achar que a Formação em Monday não trouxe clareza e eficiência para o seu negócio, basta enviar um único e-mail para o suporte da SquadHub dentro do prazo de 30 dias.
+          <br><br>
+          Nós devolveremos 100% do seu dinheiro, centavo por centavo. Sem burocracia, sem letrinhas miúdas e continuamos amigos. Você tem 1 mês inteiro para testar o método de graça.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== BLOCO 12 — FAQ ===== -->
+<section class="s">
+  <div class="c">
+    <div class="sh">
+      <span class="eyebrow">Dúvidas</span>
+      <h2>Perguntas Frequentes</h2>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Isso funciona para o meu tipo de empresa?
+          <span class="faq-chevron" aria-hidden="true">▼</span>
+        </button>
+        <div class="faq-answer">
+          Sim. A Formação em Monday foi desenhada com base nos pilares mais rígidos da engenharia de gestão tradicional (como o PDCA). Se você esteve no Cemitério de Softwares, já viu na prática que o problema não é o tipo de empresa — é a lógica por trás da escolha e da implementação das ferramentas. O método vai funcionar para você, seja uma agência, e-commerce, prestadora de serviços, escritório ou indústria.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Eu não entendo nada de tecnologia. Vou conseguir aplicar?
+          <span class="faq-chevron" aria-hidden="true">▼</span>
+        </button>
+        <div class="faq-answer">
+          Com certeza. Esse é o grande diferencial: você não vai precisar aprender a programar ou passar meses desvendando o software. Nós te entregamos os templates prontos da SquadHub — os exatos modelos que usamos em clientes de consultoria de alto padrão. O seu único trabalho é copiar, colar e seguir o passo a passo de implementação estratégica.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          A assinatura do Monday.com está inclusa no valor?
+          <span class="faq-chevron" aria-hidden="true">▼</span>
+        </button>
+        <div class="faq-answer">
+          Não, a licença do Monday.com é paga diretamente ao software. No entanto, o ganho de eficiência operacional, a eliminação do retrabalho e a economia com horas extras ou contratações erradas pagam o valor da ferramenta logo nas primeiras semanas de uso.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Como funciona o agendamento do Diagnóstico de 30 minutos?
+          <span class="faq-chevron" aria-hidden="true">▼</span>
+        </button>
+        <div class="faq-answer">
+          Assim que a sua inscrição for confirmada, você receberá dentro da plataforma de alunos o link exclusivo para escolher o melhor dia e horário na agenda dos nossos consultores oficiais da SquadHub.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          E se eu não gostar ou achar muito difícil?
+          <span class="faq-chevron" aria-hidden="true">▼</span>
+        </button>
+        <div class="faq-answer">
+          Você tem 30 dias de garantia incondicional. Se por qualquer motivo você não quiser continuar, é só mandar um e-mail para o nosso suporte e nós reembolsamos todo o seu investimento imediatamente. Sem perguntas, sem burocracia.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="rodape">
+  <p>© 2026 SquadHub. Todos os direitos reservados.<br>
+  Este site não faz parte do site do Facebook ou da Facebook Inc. Além disso, este site NÃO é endossado pelo Facebook de nenhuma maneira. FACEBOOK é uma marca comercial da FACEBOOK, Inc.</p>
+</footer>
+```
+
+- [ ] **Step 3: Adicionar JS de scroll suave e FAQ accordion antes de `</body>`**
+
+```html
+<script>
+(function(){
+  /* Scroll suave para âncoras internas */
+  document.querySelectorAll('a[href^="#"]').forEach(function(link){
+    link.addEventListener('click', function(e){
+      var id = this.getAttribute('href').slice(1);
+      var target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  /* FAQ accordion */
+  document.querySelectorAll('.faq-question').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = this.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(el){ el.classList.remove('open'); el.querySelector('.faq-question').setAttribute('aria-expanded','false'); });
+      if (!isOpen) {
+        item.classList.add('open');
+        this.setAttribute('aria-expanded','true');
+      }
+    });
+  });
+})();
+</script>
+```
+
+- [ ] **Step 4: Verificar no browser**
+  - Escudo dourado com check visível na seção de garantia
+  - FAQ abre e fecha ao clicar (apenas um aberto por vez)
+  - Botões de âncora (Hero e Ponte) fazem scroll suave até `#oferta`
+  - Footer com texto legal
+
+- [ ] **Step 5: Teste responsivo final**
+  - Mobile (375px): hero legível, cards em 1 coluna, garantia empilhada, preço legível
+  - Tablet (768px): grid 2 colunas onde aplicável
+  - Desktop (1200px): layout completo 3 colunas, max-width 860px centralizado
+
+- [ ] **Step 6: Commit final**
+  ```
+  git commit -m "feat: blocos 11-12 garantia/FAQ/footer + JS scroll+accordion LP Monday webinar"
+  ```
+
+---
+
+## Self-Review
+
+**Spec coverage checklist:**
+- ✅ Identidade visual dark navy/dourado (tokens do cemiterio.html)
+- ✅ Sem verde (#22c55e)
+- ✅ Barlow Condensed + Inter
+- ✅ Sem vídeo, sem formulário, sem modal
+- ✅ Sem bio/foto Eduardo Leal
+- ✅ Sem menção a Leonardo Adonis
+- ✅ Oferta R$1.997 → R$997 (sem parcelamento na página)
+- ✅ Badge "Condição Especial · Cemitério de Softwares"
+- ✅ Placeholder checkout com comentário claro
+- ✅ 12 Blocos PVP adaptados (Abordagem B)
+- ✅ Depoimentos: Lucas, Vanessa, Bartolomeu
+- ✅ 3 bônus com valores originais
+- ✅ Garantia 30 dias
+- ✅ FAQ 5 perguntas (Q1 adaptada para webinar)
+- ✅ Faixa de autoridade SquadHub (250+, 33k+, 6+, Parceira Oficial)
+- ✅ Responsivo mobile-first (520px, 760px)
+- ✅ Scroll suave nas âncoras
+- ✅ Sem base64, sem imagens externas pesadas
