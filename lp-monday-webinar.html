@@ -215,6 +215,63 @@ strong { font-weight: 700; color: var(--text-1); }
   margin: 0 auto 40px;
 }
 
+/* ============================================================
+   BLOCO 2 — PONTE
+   ============================================================ */
+.ponte-intro {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 40px;
+}
+.ponte-intro p {
+  font-size: clamp(15px, 2vw, 17px);
+  color: var(--text-2);
+  margin-top: 14px;
+  line-height: 1.7;
+}
+
+.prob-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 48px;
+}
+@media(min-width:520px){ .prob-grid { grid-template-columns: repeat(2,1fr); } }
+@media(min-width:760px){ .prob-grid { grid-template-columns: repeat(3,1fr); } }
+
+.prob-card {
+  background: linear-gradient(135deg, #16121E, #110F1A);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--red);
+  border-radius: var(--r);
+  padding: 20px 18px;
+}
+.prob-icon { color: var(--red); margin-bottom: 12px; display: flex; }
+.prob-card h3 { font-size: 15px; margin-bottom: 6px; }
+.prob-card p  { font-size: 13px; color: var(--text-3); line-height: 1.55; }
+
+.virada-box {
+  background: var(--card);
+  border: 1px solid var(--border-lt);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--r-lg);
+  padding: 36px 28px;
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 36px;
+}
+.virada-box .eyebrow { margin-bottom: 12px; }
+.virada-box h2 {
+  font-size: clamp(22px, 4vw, 36px);
+  margin-bottom: 14px;
+  color: var(--text-1);
+}
+.virada-box p {
+  font-size: clamp(14px, 1.8vw, 16px);
+  color: var(--text-2);
+  line-height: 1.7;
+}
+
 /* Responsive global */
 @media(min-width:768px){ .s { padding: 96px 20px; } }
 @media(min-width:768px){ .hero { padding: 100px 20px 80px; } }
@@ -252,6 +309,83 @@ strong { font-weight: 700; color: var(--text-1); }
         QUERO RESOLVER ISSO AGORA
       </a>
       <p class="btn-sub">Condição especial disponível por tempo limitado</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== BLOCO 2 — PONTE ===== -->
+<section class="s">
+  <div class="c">
+
+    <div class="ponte-intro">
+      <span class="eyebrow">Você reconhece esse cenário?</span>
+      <h2 style="margin-top:12px;">Sua empresa parou de crescer<br>— e você sabe por quê.</h2>
+      <p>Você acumula ferramentas, o time está perdido e você ainda é o ponto central de tudo. Não é coincidência. É um padrão.</p>
+    </div>
+
+    <div class="prob-grid" role="list">
+
+      <div class="prob-card" role="listitem">
+        <div class="prob-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>WhatsApp virou CRM</h3>
+        <p>Tarefas, aprovações, cobranças — tudo misturado. Informação importante some em 3 dias.</p>
+      </div>
+
+      <div class="prob-card" role="listitem">
+        <div class="prob-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <h3>Planilha desatualizada</h3>
+        <p>Cada pessoa tem a sua versão. Decisões tomadas com dados de ontem.</p>
+      </div>
+
+      <div class="prob-card" role="listitem">
+        <div class="prob-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+        </div>
+        <h3>Assinaturas que não entregam</h3>
+        <p>80% do time não usa os softwares que você paga todo mês.</p>
+      </div>
+
+      <div class="prob-card" role="listitem">
+        <div class="prob-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+        </div>
+        <h3>Retrabalho constante</h3>
+        <p>A mesma informação digitada em três sistemas. Erros e tempo desperdiçado.</p>
+      </div>
+
+      <div class="prob-card" role="listitem">
+        <div class="prob-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg>
+        </div>
+        <h3>Você é o único que sabe tudo</h3>
+        <p>Sem você presente, nada avança. O time depende do seu aval pra cada decisão pequena.</p>
+      </div>
+
+      <div class="prob-card" role="listitem">
+        <div class="prob-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+        </div>
+        <h3>Mais software, mais confusão</h3>
+        <p>Quanto mais ferramentas, mais reuniões de alinhamento. O crescimento trava.</p>
+      </div>
+
+    </div>
+
+    <div class="virada-box">
+      <span class="eyebrow">A Virada</span>
+      <h2>Você já viu o diagnóstico.<br><span class="gold">Aqui está o tratamento.</span></h2>
+      <p>Empresas que saíram desse ciclo não compraram mais um software. Elas pararam de empilhar e passaram a <strong>centralizar</strong>. Existe um método para fazer isso — e você pode aplicar na sua empresa ainda esta semana.</p>
+    </div>
+
+    <div class="btn-wrap">
+      <a href="#oferta" class="btn-cta">VER A CONDIÇÃO ESPECIAL</a>
     </div>
 
   </div>
