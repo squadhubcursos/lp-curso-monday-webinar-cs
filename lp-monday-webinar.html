@@ -144,8 +144,80 @@ strong { font-weight: 700; color: var(--text-1); }
 .btn-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .btn-sub { font-size: 12px; color: var(--text-3); text-align: center; }
 
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 72px 20px 64px;
+  text-align: center;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 400px;
+  background: radial-gradient(ellipse at center, rgba(18,58,90,0.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(18,58,90,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18,58,90,0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 1; }
+
+.event-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-border);
+  border-radius: 100px;
+  padding: 8px 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 32px;
+}
+
+.hero-label {
+  display: block;
+  font-family: var(--font-title);
+  font-size: clamp(13px, 1.8vw, 17px);
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--blue-lt);
+  margin-bottom: 8px;
+}
+
+.hero-title {
+  margin-bottom: 28px;
+}
+
+.hero-sub {
+  font-size: clamp(15px, 2.2vw, 18px);
+  color: var(--text-2);
+  line-height: 1.65;
+  max-width: 620px;
+  margin: 0 auto 40px;
+}
+
 /* Responsive global */
 @media(min-width:768px){ .s { padding: 96px 20px; } }
+@media(min-width:768px){ .hero { padding: 100px 20px 80px; } }
 @media(prefers-reduced-motion: reduce){
   .btn-cta { transition: none; }
 }
@@ -155,6 +227,37 @@ strong { font-weight: 700; color: var(--text-1); }
 
 <!-- CHECKOUT URL: https://checkout.squadhub.com.br/checkout/lp-monday-webinar -->
 <!-- SUBSTITUIR a URL acima antes de publicar -->
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-inner c">
+
+    <div class="event-badge">
+      Condição Especial &nbsp;·&nbsp; Cemitério de Softwares
+    </div>
+
+    <h1 class="hero-title">
+      <span class="hero-label">Formação Completa</span>
+      Pare de apagar<br>incêndios.<br>
+      <span class="blue">Automatize sua</span><br>operação.
+    </h1>
+
+    <p class="hero-sub">
+      Você já viu o diagnóstico. Sabe o que está travando sua empresa.<br>
+      <strong>Agora é hora do tratamento:</strong> o passo a passo para centralizar sua operação, dar autonomia ao time e voltar a crescer — sem precisar contratar mais gente.
+    </p>
+
+    <div class="btn-wrap">
+      <a href="#oferta" class="btn-cta">
+        QUERO RESOLVER ISSO AGORA
+      </a>
+      <p class="btn-sub">Condição especial disponível por tempo limitado</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
 
 </body>
 </html>
