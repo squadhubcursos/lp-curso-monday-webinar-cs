@@ -361,6 +361,125 @@ strong { font-weight: 700; color: var(--text-1); }
   .auto-item:last-child { border-bottom: none; }
 }
 
+/* ============================================================
+   BLOCOS 4-7
+   ============================================================ */
+
+/* Bullets de desejo */
+.bullets-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 28px;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.bullet-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+}
+.bullet-ico {
+  flex-shrink: 0;
+  color: var(--blue-lt);
+  margin-top: 2px;
+}
+.bullet-item p {
+  font-size: 15px;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+/* Problemas expandidos (Bloco 5) */
+.excl-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 32px;
+}
+.excl-card {
+  background: linear-gradient(135deg, #16121E, #110F1A);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--red);
+  border-radius: var(--r);
+  padding: 22px 22px;
+}
+.excl-card h3 { font-size: 16px; margin-bottom: 8px; }
+.excl-card p  { font-size: 14px; color: var(--text-3); line-height: 1.6; }
+
+/* Dor & Solução (Bloco 6) */
+.ds-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 32px;
+}
+.ds-card {
+  background: var(--card-hi);
+  border: 1px solid var(--border-lt);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.ds-dor {
+  padding: 18px 24px;
+  background: var(--red-dim);
+  border-bottom: 1px solid rgba(239,68,68,0.15);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ds-sol {
+  padding: 20px 24px;
+}
+.ds-sol h3 { font-size: 16px; margin-bottom: 8px; color: var(--text-1); }
+.ds-sol p  { font-size: 14px; color: var(--text-3); line-height: 1.6; }
+
+/* Como Funciona (Bloco 7) */
+.steps-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 40px;
+}
+@media(min-width:600px){ .steps-grid { grid-template-columns: repeat(3,1fr); } }
+
+.step-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--blue-lt);
+  border-radius: var(--r);
+  padding: 28px 22px;
+  text-align: center;
+}
+.step-num {
+  font-family: var(--font-title);
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--border-lt);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.step-card h3 { font-size: 16px; margin-bottom: 10px; }
+.step-card p  { font-size: 14px; color: var(--text-3); line-height: 1.6; }
+.step-benefit {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: var(--blue-bg);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--blue-lt);
+  font-weight: 600;
+}
+
 /* Responsive global */
 @media(min-width:768px){ .s { padding: 96px 20px; } }
 @media(min-width:768px){ .hero { padding: 100px 20px 80px; } }
@@ -567,6 +686,168 @@ strong { font-weight: 700; color: var(--text-1); }
       </div>
     </div>
 
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== BLOCO 4 — HEADLINE + BULLETS ===== -->
+<section class="s">
+  <div class="c">
+    <div class="sh">
+      <span class="eyebrow">O que muda com o método</span>
+      <h2>Imagine sua empresa rodando<br><span class="blue">sem você no meio de tudo</span></h2>
+      <p class="lead">Esse é o estado que empresas que crescem de verdade têm em comum. E é exatamente o que esse método entrega.</p>
+    </div>
+
+    <ul class="bullets-list">
+      <li class="bullet-item">
+        <span class="bullet-ico" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <p><strong>Entender por que seus softwares atuais falham</strong> — e nunca mais cair na armadilha de comprar mais uma ferramenta sem ter a lógica certa por trás.</p>
+      </li>
+      <li class="bullet-item">
+        <span class="bullet-ico" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <p><strong>Mapear exatamente o que sua operação precisa</strong> — e aposentar as ferramentas que estão só acumulando custo e confusão.</p>
+      </li>
+      <li class="bullet-item">
+        <span class="bullet-ico" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <p><strong>Colocar IA e automações trabalhando por você 24/7</strong> — eliminando tarefas repetitivas e erros humanos sem precisar inflar o time.</p>
+      </li>
+      <li class="bullet-item">
+        <span class="bullet-ico" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <p><strong>Ter um painel gerencial que você bate o olho às 9h</strong> e já sabe o que tá andando, o que tá atrasado e quanto tá entrando no caixa — sem mandar um "já fez aquilo?" no WhatsApp.</p>
+      </li>
+      <li class="bullet-item">
+        <span class="bullet-ico" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <p><strong>Construir uma empresa que escala com menos pessoas</strong> — porque o time ganhou autonomia real, não só mais uma reunião de alinhamento.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== BLOCO 5 — EXCLUSIVIDADE (problemas expandidos) ===== -->
+<section class="s s-alt">
+  <div class="c">
+    <div class="sh">
+      <span class="eyebrow">Resultado da análise</span>
+      <h2>Se você chegou até aqui,<br>provavelmente está passando por:</h2>
+    </div>
+
+    <div class="excl-grid">
+      <div class="excl-card">
+        <h3>Sua operação depende 100% de você</h3>
+        <p>Toda decisão passa pelo seu crivo — não importa o tamanho. Você entrou de férias e o time travou. Você ficou doente e o projeto atrasou. A empresa cresceu, mas a sua dependência também.</p>
+      </div>
+      <div class="excl-card">
+        <h3>Você paga por softwares que ninguém usa</h3>
+        <p>O time adotou o WhatsApp de volta porque "é mais fácil". O ClickUp virou enfeite. O Trello ficou com 3 tarefas. Você continua pagando as assinaturas e continua sem visibilidade real da operação.</p>
+      </div>
+      <div class="excl-card">
+        <h3>A informação está espalhada em 5 lugares diferentes</h3>
+        <p>Proposta no e-mail. Status da entrega no WhatsApp. Financeiro na planilha. Tarefa no sistema. E quando você precisa de um número agora, precisa perguntar pra três pessoas diferentes para montar a resposta.</p>
+      </div>
+      <div class="excl-card">
+        <h3>Seu crescimento esbarrou no seu time</h3>
+        <p>Você quer contratar menos e produzir mais. Mas sem processo claro, cada nova pessoa que entra gera mais reunião de alinhamento — não mais resultado. O gargalo não é o time. É a falta de estrutura.</p>
+      </div>
+      <div class="excl-card">
+        <h3>Você não consegue sair do operacional</h3>
+        <p>O dia começa com urgências, termina com urgências. Você sabe que deveria estar pensando em crescimento, estratégia, novos mercados — mas a operação não deixa. E amanhã é igual.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== BLOCO 6 — DOR & SOLUÇÃO ===== -->
+<section class="s">
+  <div class="c">
+    <div class="sh">
+      <span class="eyebrow">A Formação Monday</span>
+      <h2>Resolva tudo isso em semanas<br><span class="blue">com a Formação em Monday.com</span></h2>
+    </div>
+
+    <div class="ds-grid">
+      <div class="ds-card">
+        <div class="ds-dor">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Sua empresa sem processos claros: caos, retrabalho e você no meio de tudo
+        </div>
+        <div class="ds-sol">
+          <h3>Curso Completo de Monday.com — Sob a Ótica do Dono</h3>
+          <p>Passo a passo prático para estruturar a espinha dorsal da sua empresa. Você vai aprender a desenhar processos, criar painéis gerenciais e centralizar sua operação em uma única tela — do jeito que um empresário precisa, não um funcionário técnico.</p>
+        </div>
+      </div>
+
+      <div class="ds-card">
+        <div class="ds-dor">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Tarefas repetitivas consumindo horas do seu time todos os dias
+        </div>
+        <div class="ds-sol">
+          <h3>Inteligência Artificial e Automações na Prática</h3>
+          <p>Como colocar robôs para trabalhar por você 24/7. Reduza o erro humano a zero, elimine tarefas repetitivas e faça sua empresa produzir o dobro sem precisar inflar o time. O que não existia há 2 anos agora é acessível com alguns cliques.</p>
+        </div>
+      </div>
+
+      <div class="ds-card">
+        <div class="ds-dor">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Nenhuma visibilidade do que acontece na empresa sem você perguntar
+        </div>
+        <div class="ds-sol">
+          <h3>Visibilidade Macrogerencial — O Painel do CEO</h3>
+          <p>Como configurar a ferramenta para que, às 9h da manhã, você bata o olho e saiba exatamente o que está andando, o que está atrasado e quanto está entrando no caixa. Sem mandar um único "já fez aquilo?" no WhatsApp.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== BLOCO 7 — COMO FUNCIONA ===== -->
+<section class="s s-alt">
+  <div class="c">
+    <div class="sh">
+      <span class="eyebrow">O Método</span>
+      <h2>Como funciona na prática</h2>
+      <p class="lead">Três fases simples. Cada uma com resultado concreto que você vê na semana em que aplica.</p>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3>Mapear</h3>
+        <p>Você entende a lógica por trás da escolha certa de ferramentas e aprende a desenhar os processos da sua empresa com clareza — identificando o que fica e o que vai pro cemitério.</p>
+        <div class="step-benefit">Fim do caos de ferramentas</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3>Implementar</h3>
+        <p>Você não começa do zero. Usa os templates validados da SquadHub — os exatos modelos que usamos em clientes de consultoria de alto padrão. É copiar, colar e adaptar ao seu negócio.</p>
+        <div class="step-benefit">Operação estruturada em dias</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3>Automatizar e Monitorar</h3>
+        <p>Você ativa automações e IA para eliminar o retrabalho, e configura o painel gerencial que te dá visibilidade total da operação — sem precisar perguntar pra ninguém.</p>
+        <div class="step-benefit">Time autônomo, dono estratégico</div>
+      </div>
+    </div>
   </div>
 </section>
 
