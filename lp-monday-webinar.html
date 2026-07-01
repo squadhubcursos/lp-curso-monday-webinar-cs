@@ -648,6 +648,114 @@ strong { font-weight: 700; color: var(--text-1); }
 @media(prefers-reduced-motion: reduce){
   .btn-cta { transition: none; }
 }
+
+/* ============================================================
+   BLOCOS 11-12 — GARANTIA + FAQ + FOOTER
+   ============================================================ */
+
+/* Garantia */
+.garantia-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  background: var(--card);
+  border: 1px solid var(--border-lt);
+  border-radius: var(--r-lg);
+  padding: 40px 36px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+@media(max-width:600px){
+  .garantia-box { flex-direction: column; align-items: center; text-align: center; padding: 32px 24px; }
+}
+.garantia-ico-wrap {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.garantia-ico-wrap svg { width: 72px; height: 72px; }
+.garantia-selo-texto {
+  font-family: var(--font-title);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  line-height: 1.2;
+}
+.garantia-headline {
+  font-family: var(--font-title);
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--text-1);
+  margin-bottom: 12px;
+}
+.garantia-text {
+  font-size: 15px;
+  color: var(--text-2);
+  line-height: 1.7;
+}
+
+/* FAQ */
+.faq-list { margin-top: 32px; }
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 20px 0;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-1);
+  transition: color 0.2s;
+}
+.faq-question:hover { color: var(--blue-lt); }
+.faq-chevron {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--text-3);
+  transition: transform 0.25s;
+}
+.faq-item.open .faq-chevron { transform: rotate(180deg); }
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+  font-size: 14px;
+  color: var(--text-3);
+  line-height: 1.7;
+}
+.faq-item.open .faq-answer {
+  max-height: 400px;
+  padding-bottom: 20px;
+}
+
+/* Footer */
+.rodape {
+  padding: 32px 20px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+.rodape p {
+  font-size: 12px;
+  color: var(--text-3);
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
 </style>
 </head>
 <body>
@@ -1124,7 +1232,129 @@ strong { font-weight: 700; color: var(--text-1); }
   </div>
 </section>
 
+<!-- ===== BLOCO 11 — GARANTIA ===== -->
+<section class="s s-alt">
+  <div class="c">
+    <div class="garantia-box">
+      <div class="garantia-ico-wrap">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M40 6L12 18v20c0 16.6 11.8 32.1 28 35.8C56.2 70.1 68 54.6 68 38V18L40 6z" fill="#C8A24A" opacity="0.10"/>
+          <path d="M40 6L12 18v20c0 16.6 11.8 32.1 28 35.8C56.2 70.1 68 54.6 68 38V18L40 6z" stroke="#C8A24A" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M28 40l8 8 16-16" stroke="#C8A24A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="garantia-selo-texto">30 dias<br>de garantia</span>
+      </div>
+      <div>
+        <h2 class="garantia-headline">Risco Zero: Garantia Incondicional de 30 Dias</h2>
+        <p class="garantia-text">
+          O risco é todo meu. Se você garantir o seu acesso agora, assistir às aulas, baixar os templates e achar que a Formação em Monday não trouxe clareza e eficiência para o seu negócio, basta enviar um único e-mail para o suporte da SquadHub dentro do prazo de 30 dias.
+          <br><br>
+          Nós devolveremos 100% do seu dinheiro, centavo por centavo. Sem burocracia, sem letrinhas miúdas e continuamos amigos. Você tem 1 mês inteiro para testar o método de graça.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="divider"></div>
+
+<!-- ===== BLOCO 12 — FAQ ===== -->
+<section class="s">
+  <div class="c">
+    <div class="sh">
+      <span class="eyebrow">Dúvidas</span>
+      <h2>Perguntas Frequentes</h2>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Isso funciona para o meu tipo de empresa?
+          <span class="faq-chevron" aria-hidden="true">▼</span>
+        </button>
+        <div class="faq-answer">
+          Sim. A Formação em Monday foi desenhada com base nos pilares mais rígidos da engenharia de gestão tradicional (como o PDCA). Se você esteve no Cemitério de Softwares, já viu na prática que o problema não é o tipo de empresa — é a lógica por trás da escolha e da implementação das ferramentas. O método vai funcionar para você, seja uma agência, e-commerce, prestadora de serviços, escritório ou indústria.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Eu não entendo nada de tecnologia. Vou conseguir aplicar?
+          <span class="faq-chevron" aria-hidden="true">▼</span>
+        </button>
+        <div class="faq-answer">
+          Com certeza. Esse é o grande diferencial: você não vai precisar aprender a programar ou passar meses desvendando o software. Nós te entregamos os templates prontos da SquadHub — os exatos modelos que usamos em clientes de consultoria de alto padrão. O seu único trabalho é copiar, colar e seguir o passo a passo de implementação estratégica.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          A assinatura do Monday.com está inclusa no valor?
+          <span class="faq-chevron" aria-hidden="true">▼</span>
+        </button>
+        <div class="faq-answer">
+          Não, a licença do Monday.com é paga diretamente ao software. No entanto, o ganho de eficiência operacional, a eliminação do retrabalho e a economia com horas extras ou contratações erradas pagam o valor da ferramenta logo nas primeiras semanas de uso.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Como funciona o agendamento do Diagnóstico de 30 minutos?
+          <span class="faq-chevron" aria-hidden="true">▼</span>
+        </button>
+        <div class="faq-answer">
+          Assim que a sua inscrição for confirmada, você receberá dentro da plataforma de alunos o link exclusivo para escolher o melhor dia e horário na agenda dos nossos consultores oficiais da SquadHub.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          E se eu não gostar ou achar muito difícil?
+          <span class="faq-chevron" aria-hidden="true">▼</span>
+        </button>
+        <div class="faq-answer">
+          Você tem 30 dias de garantia incondicional. Se por qualquer motivo você não quiser continuar, é só mandar um e-mail para o nosso suporte e nós reembolsamos todo o seu investimento imediatamente. Sem perguntas, sem burocracia.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="rodape">
+  <p>© 2026 SquadHub. Todos os direitos reservados.<br>
+  Este site não faz parte do site do Facebook ou da Facebook Inc. Além disso, este site NÃO é endossado pelo Facebook de nenhuma maneira. FACEBOOK é uma marca comercial da FACEBOOK, Inc.</p>
+</footer>
+
+<script>
+(function(){
+  /* Scroll suave para âncoras internas */
+  document.querySelectorAll('a[href^="#"]').forEach(function(link){
+    link.addEventListener('click', function(e){
+      var id = this.getAttribute('href').slice(1);
+      var target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  /* FAQ accordion */
+  document.querySelectorAll('.faq-question').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = this.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(el){ el.classList.remove('open'); el.querySelector('.faq-question').setAttribute('aria-expanded','false'); });
+      if (!isOpen) {
+        item.classList.add('open');
+        this.setAttribute('aria-expanded','true');
+      }
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
