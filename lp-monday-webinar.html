@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formação Monday.com — Condição Especial Cemitério de Softwares</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   LP MONDAY — PÚBLICO WEBINAR CEMITÉRIO DE SOFTWARES
+   SquadHub · Condição especial pós-webinar
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:         #050505;
+  --surf:       #080F1A;
+  --card:       #0D2640;
+  --card-hi:    #163352;
+  --border:     #0F2A42;
+  --border-lt:  #1A3F5C;
+  --gold:       #C8A24A;
+  --gold-dim:   rgba(200,162,74,0.12);
+  --gold-border:rgba(200,162,74,0.50);
+  --blue-lt:    #4A9EBF;
+  --blue-bg:    rgba(18,58,90,0.30);
+  --blue-glow:  rgba(18,58,90,0.40);
+  --red:        #EF4444;
+  --red-dim:    rgba(239,68,68,0.12);
+  --text-1:     #F8FAFC;
+  --text-2:     #CBD5E1;
+  --text-3:     #7A9BB5;
+  --font-title: 'Barlow Condensed', sans-serif;
+  --font-body:  'Inter', sans-serif;
+  --max-w:      860px;
+  --r:          12px;
+  --r-lg:       20px;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text-1);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* Layout */
+.c { max-width: var(--max-w); margin: 0 auto; padding: 0 20px; width: 100%; }
+.s { padding: 72px 20px; }
+.s-alt { background: var(--surf); }
+.divider { height: 1px; background: var(--border); }
+
+/* Typography */
+h1 {
+  font-family: var(--font-title);
+  font-size: clamp(44px, 9vw, 92px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--text-1);
+}
+h2 {
+  font-family: var(--font-title);
+  font-size: clamp(26px, 4.8vw, 48px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--text-1);
+}
+h3 {
+  font-family: var(--font-title);
+  font-size: clamp(16px, 2.3vw, 20px);
+  font-weight: 800;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--text-1);
+}
+p { color: var(--text-2); font-size: 15px; line-height: 1.7; }
+.lead { font-size: clamp(15px, 2.2vw, 18px); line-height: 1.7; }
+strong { font-weight: 700; color: var(--text-1); }
+.gold { color: var(--gold); }
+.blue { color: var(--blue-lt); }
+.tc { text-align: center; }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--blue-lt);
+}
+
+.sh { text-align: center; margin-bottom: 48px; }
+.sh h2 { margin-top: 12px; }
+.sh .lead { margin-top: 14px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+/* CTA Button */
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #1A4F72, #123A5A, #0D2E45);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: clamp(13px, 2.5vw, 16px);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 18px 40px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 4px 24px rgba(18,58,90,0.55);
+  transition: transform 0.2s, box-shadow 0.2s;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  line-height: 1.4;
+}
+.btn-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(18,58,90,0.70); color: #fff !important; }
+.btn-cta:active { transform: translateY(0); }
+.btn-cta:focus, .btn-cta:visited { color: #fff !important; text-decoration: none !important; }
+
+.btn-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.btn-sub { font-size: 12px; color: var(--text-3); text-align: center; }
+
+/* Responsive global */
+@media(min-width:768px){ .s { padding: 96px 20px; } }
+@media(prefers-reduced-motion: reduce){
+  .btn-cta { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- CHECKOUT URL: https://checkout.squadhub.com.br/checkout/lp-monday-webinar -->
+<!-- SUBSTITUIR a URL acima antes de publicar -->
+
+</body>
+</html>
