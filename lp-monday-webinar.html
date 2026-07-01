@@ -569,6 +569,79 @@ strong { font-weight: 700; color: var(--text-1); }
 .bonus-total p { font-size: 15px; color: var(--text-2); }
 .bonus-total strong { color: var(--gold); font-size: 18px; }
 
+/* ============================================================
+   BLOCO 10 — OFERTA
+   ============================================================ */
+.oferta-section {
+  text-align: center;
+  padding: 88px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.oferta-section::before {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 400px;
+  background: radial-gradient(ellipse at center, rgba(200,162,74,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.oferta-inner { position: relative; z-index: 1; }
+
+.oferta-box {
+  background: var(--card);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--r-lg);
+  padding: 44px 36px;
+  max-width: 580px;
+  margin: 40px auto 0;
+}
+.oferta-label {
+  font-size: 13px;
+  color: var(--text-3);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.preco-de {
+  font-size: clamp(18px, 3vw, 24px);
+  color: var(--text-3);
+  text-decoration: line-through;
+  margin-bottom: 6px;
+}
+.preco-por {
+  font-family: var(--font-title);
+  font-size: clamp(52px, 10vw, 88px);
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.preco-por-label {
+  font-size: 14px;
+  color: var(--text-3);
+  margin-top: 8px;
+  margin-bottom: 28px;
+}
+.condicao-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-border);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+}
+
 /* Responsive global */
 @media(min-width:768px){ .s { padding: 96px 20px; } }
 @media(min-width:768px){ .hero { padding: 100px 20px 80px; } }
@@ -1014,6 +1087,39 @@ strong { font-weight: 700; color: var(--text-1); }
 
     <div class="bonus-total">
       <p>Somando treinamento completo + templates + Scrum + diagnóstico individual,<br>o valor total do pacote passaria facilmente de <strong>R$ 3.000,00</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== BLOCO 10 — OFERTA ===== -->
+<section class="oferta-section" id="oferta">
+  <div class="oferta-inner c">
+    <span class="eyebrow" style="margin-bottom:16px; display:inline-block;">Condição Especial</span>
+    <h2>Garanta o seu acesso agora</h2>
+    <p class="lead" style="margin-top:12px; max-width:520px; margin-left:auto; margin-right:auto;">
+      Essa condição foi criada exclusivamente para quem participou do Cemitério de Softwares.<br>
+      <strong>Não é o preço público do curso.</strong>
+    </p>
+
+    <div class="oferta-box">
+      <div class="condicao-badge">
+        Condição Especial · Cemitério de Softwares
+      </div>
+
+      <p class="oferta-label">Investimento</p>
+      <p class="preco-de">De R$ 1.997,00</p>
+      <div class="preco-por">R$ 997</div>
+      <p class="preco-por-label">Condições de pagamento disponíveis no checkout</p>
+
+      <div class="btn-wrap">
+        <!-- CHECKOUT URL: substituir antes de publicar -->
+        <a href="https://checkout.squadhub.com.br/checkout/lp-monday-webinar" class="btn-cta">
+          QUERO GARANTIR MINHA VAGA
+        </a>
+        <p class="btn-sub">Acesso Imediato&nbsp;·&nbsp;Templates Inclusos&nbsp;·&nbsp;30 Dias de Garantia&nbsp;·&nbsp;🔒 Compra Segura</p>
+      </div>
     </div>
   </div>
 </section>
