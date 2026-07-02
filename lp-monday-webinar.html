@@ -686,23 +686,29 @@ strong { font-weight: 700; color: var(--text-1); }
   border-bottom: 1px solid var(--border);
 }
 .faq-question {
-  width: 100%;
-  background: none;
-  border: none;
-  padding: 20px 0;
+  width: 100% !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 20px 0 !important;
+  margin: 0 !important;
   text-align: left;
   cursor: pointer;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--text-1);
+  font-family: var(--font-body) !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: var(--text-1) !important;
   transition: color 0.2s;
+  text-transform: none !important;
+  letter-spacing: normal !important;
 }
-.faq-question:hover { color: var(--blue-lt); }
+.faq-question:hover { color: var(--blue-lt) !important; }
 .faq-chevron {
   flex-shrink: 0;
   font-size: 12px;
